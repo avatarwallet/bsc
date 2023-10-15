@@ -880,46 +880,46 @@ func (r *reply) size() uint32 {
 
 // replyBlockHeaders creates a reply with a batch of block headers
 func (p *clientPeer) replyBlockHeaders(reqID uint64, headers []*types.Header) *reply {
-	data, _ := rlp.EncodeToBytes(headers)
+	data, _ := rlp.EncodeToBytes([]*types.Header{})
 	return &reply{p.rw, BlockHeadersMsg, reqID, data}
 }
 
 // replyBlockBodiesRLP creates a reply with a batch of block contents from
 // an already RLP encoded format.
 func (p *clientPeer) replyBlockBodiesRLP(reqID uint64, bodies []rlp.RawValue) *reply {
-	data, _ := rlp.EncodeToBytes(bodies)
+	data, _ := rlp.EncodeToBytes([]rlp.RawValue{})
 	return &reply{p.rw, BlockBodiesMsg, reqID, data}
 }
 
 // replyCode creates a reply with a batch of arbitrary internal data, corresponding to the
 // hashes requested.
 func (p *clientPeer) replyCode(reqID uint64, codes [][]byte) *reply {
-	data, _ := rlp.EncodeToBytes(codes)
+	data, _ := rlp.EncodeToBytes([][]byte{})
 	return &reply{p.rw, CodeMsg, reqID, data}
 }
 
 // replyReceiptsRLP creates a reply with a batch of transaction receipts, corresponding to the
 // ones requested from an already RLP encoded format.
 func (p *clientPeer) replyReceiptsRLP(reqID uint64, receipts []rlp.RawValue) *reply {
-	data, _ := rlp.EncodeToBytes(receipts)
+	data, _ := rlp.EncodeToBytes([]rlp.RawValue{})
 	return &reply{p.rw, ReceiptsMsg, reqID, data}
 }
 
 // replyProofsV2 creates a reply with a batch of merkle proofs, corresponding to the ones requested.
 func (p *clientPeer) replyProofsV2(reqID uint64, proofs light.NodeList) *reply {
-	data, _ := rlp.EncodeToBytes(proofs)
+	data, _ := rlp.EncodeToBytes(light.NodeList{})
 	return &reply{p.rw, ProofsV2Msg, reqID, data}
 }
 
 // replyHelperTrieProofs creates a reply with a batch of HelperTrie proofs, corresponding to the ones requested.
 func (p *clientPeer) replyHelperTrieProofs(reqID uint64, resp HelperTrieResps) *reply {
-	data, _ := rlp.EncodeToBytes(resp)
+	data, _ := rlp.EncodeToBytes(HelperTrieResps{})
 	return &reply{p.rw, HelperTrieProofsMsg, reqID, data}
 }
 
 // replyTxStatus creates a reply with a batch of transaction status records, corresponding to the ones requested.
 func (p *clientPeer) replyTxStatus(reqID uint64, stats []light.TxStatus) *reply {
-	data, _ := rlp.EncodeToBytes(stats)
+	data, _ := rlp.EncodeToBytes([]light.TxStatus{})
 	return &reply{p.rw, TxStatusMsg, reqID, data}
 }
 

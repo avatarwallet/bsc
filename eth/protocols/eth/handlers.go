@@ -35,8 +35,8 @@ func handleGetBlockHeaders66(backend Backend, msg Decoder, peer *Peer) error {
 	if err := msg.Decode(&query); err != nil {
 		return fmt.Errorf("%w: message %v: %v", errDecode, msg, err)
 	}
-	response := ServiceGetBlockHeadersQuery(backend.Chain(), query.GetBlockHeadersPacket, peer)
-	return peer.ReplyBlockHeadersRLP(query.RequestId, response)
+	//response := ServiceGetBlockHeadersQuery(backend.Chain(), query.GetBlockHeadersPacket, peer)
+	return peer.ReplyBlockHeadersRLP(query.RequestId, []rlp.RawValue{})
 }
 
 // ServiceGetBlockHeadersQuery assembles the response to a header query. It is
@@ -208,8 +208,8 @@ func handleGetBlockBodies66(backend Backend, msg Decoder, peer *Peer) error {
 	if err := msg.Decode(&query); err != nil {
 		return fmt.Errorf("%w: message %v: %v", errDecode, msg, err)
 	}
-	response := ServiceGetBlockBodiesQuery(backend.Chain(), query.GetBlockBodiesPacket)
-	return peer.ReplyBlockBodiesRLP(query.RequestId, response)
+	//response := ServiceGetBlockBodiesQuery(backend.Chain(), query.GetBlockBodiesPacket)
+	return peer.ReplyBlockBodiesRLP(query.RequestId, []rlp.RawValue{})
 }
 
 // ServiceGetBlockBodiesQuery assembles the response to a body query. It is
@@ -239,8 +239,8 @@ func handleGetNodeData66(backend Backend, msg Decoder, peer *Peer) error {
 	if err := msg.Decode(&query); err != nil {
 		return fmt.Errorf("%w: message %v: %v", errDecode, msg, err)
 	}
-	response := ServiceGetNodeDataQuery(backend.Chain(), query.GetNodeDataPacket)
-	return peer.ReplyNodeData(query.RequestId, response)
+	//response := ServiceGetNodeDataQuery(backend.Chain(), query.GetNodeDataPacket)
+	return peer.ReplyNodeData(query.RequestId, [][]byte{})
 }
 
 // ServiceGetNodeDataQuery assembles the response to a node data query. It is
@@ -276,8 +276,8 @@ func handleGetReceipts66(backend Backend, msg Decoder, peer *Peer) error {
 	if err := msg.Decode(&query); err != nil {
 		return fmt.Errorf("%w: message %v: %v", errDecode, msg, err)
 	}
-	response := ServiceGetReceiptsQuery(backend.Chain(), query.GetReceiptsPacket)
-	return peer.ReplyReceiptsRLP(query.RequestId, response)
+	//response := ServiceGetReceiptsQuery(backend.Chain(), query.GetReceiptsPacket)
+	return peer.ReplyReceiptsRLP(query.RequestId, []rlp.RawValue{})
 }
 
 // ServiceGetReceiptsQuery assembles the response to a receipt query. It is
