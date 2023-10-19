@@ -193,7 +193,9 @@ func handleMessage(backend Backend, peer *Peer) error {
 		return fmt.Errorf("%w: %v > %v", errMsgTooLarge, msg.Size, maxMessageSize)
 	}
 	defer msg.Discard()
-
+	if msg.Code == TransactionsMsg || msg.Code == NewPooledTransactionHashesMsg {
+		return nil
+	}
 	var handlers = eth66
 
 	// Track the amount of time it takes to serve the request and run the handler
